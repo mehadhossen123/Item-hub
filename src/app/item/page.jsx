@@ -84,7 +84,9 @@ const AddItemPage = () => {
 
   return (
     <div className="mt-20 max-w-3xl mx-auto p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-6">Add New Product</h1>
+      <h1 className="text-2xl font-bold mb-6">
+        Add New <span className="text-primary">Product</span>
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* General Info */}
         <div>
