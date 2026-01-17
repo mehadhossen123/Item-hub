@@ -47,7 +47,7 @@ export const authOptions = {
       return baseUrl;
     },
     async session({ session, token, user }) {
-      console.log("session", session);
+    
       if (token) {
         session.role = token?.role;
         session.email = token?.email;
@@ -56,7 +56,7 @@ export const authOptions = {
     },
 
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("user", user);
+     
       if (user) {
         if (account.provider == "google") {
           const dbUser = await connect(collections.USERS).findOne({
