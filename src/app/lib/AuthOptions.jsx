@@ -1,6 +1,7 @@
 import { loginUser } from "../action/server/auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connect } from "./dbConnect";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -18,31 +19,35 @@ export const authOptions = {
         return user;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
-//   callbacks: {
-//     async signIn({ user, account, profile, email, credentials }) {
-//       // console.log({user,account,profile,email,credentials})
-//       const isExist = await connect(collections.USERS).findOne({
-//         email: user?.email,
-//       });
-//       if (isExist) {
-//         return true;
-//       }
-//       const newUser = {
-//         provider: account?.provider,
-//         name: user?.name,
-//         email: user?.email,
-//         image: user?.image,
-//         role: "user",
-//       };
-//       const result = await connect(collections.USERS).insertOne(newUser);
-//       return result.acknowledged;
-//     },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // console.log({user,account,profile,email,credentials})
+      const isExist = await connect(collections.USERS).findOne({
+        email: user?.email,
+      });
+      if (isExist) {
+        return true;
+      }
+      const newUser = {
+        provider: account?.provider,
+        name: user?.name,
+        email: user?.email,
+        image: user?.image,
+        role: "user",
+      };
+      const result = await connect(collections.USERS).insertOne(newUser);
+      return result.acknowledged;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
     async session({ session, token, user }) {
-        console.log('session',session)
+      console.log("session", session);
       if (token) {
         session.role = token?.role;
         session.email = token?.email;
@@ -50,21 +55,22 @@ export const authOptions = {
       return session;
     },
 
-    // async jwt({ token, user, account, profile, isNewUser }) {
-    //     console.log("user",user)
-    //   if (user) {
-    //     if (account.provider == "google") {
-    //       const dbUser = await connect(collections.USERS).findOne({
-    //         email: user?.email,
-    //       });
-    //       token.role = dbUser?.role;
-    //       token.email = dbUser?.email;
-    //     } else {
-    //       token.role = user?.role;
-    //       token.email = user?.email;
-    //     }
-    //   }
-    //   return token;
-    // },
-  }
+    async jwt({ token, user, account, profile, isNewUser }) {
+      console.log("user", user);
+      if (user) {
+        if (account.provider == "google") {
+          const dbUser = await connect(collections.USERS).findOne({
+            email: user?.email,
+          });
+          token.role = dbUser?.role;
+          token.email = dbUser?.email;
+        } else {
+          token.role = user?.role;
+          token.email = user?.email;
+        }
+      }
+      return token;
+    },
+  },
+};
 
