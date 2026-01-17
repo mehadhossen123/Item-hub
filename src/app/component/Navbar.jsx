@@ -4,6 +4,7 @@ import React from "react";
 
 import NavLink from "./NavLink";
 import Logo from "./Logo";
+import Link from "next/link";
 
 const Navbar = () => {
   const nav = (
@@ -58,7 +59,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-4">
          
-         <h1>auth</h1>
+        <Link className="btn btn-primary btn-outline" href={'/login'}>Login</Link>
         </div>
       </div>
     </div>
