@@ -22,15 +22,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
-        <nav className="w-11/12 mx-auto my-2">
-          <Navbar></Navbar>
+        <nav className="w-full max-w-7xl mx-auto py-3 px-4">
+          <Navbar />
         </nav>
-        <main className="md:w-11/12 mx-auto my-2 min-h-[calc(100vh-235px)]">
+
+        <main className="w-full max-w-7xl mx-auto px-4 py-6 min-h-[calc(100vh-235px)]">
           {children}
         </main>
-        <footer><Footer></Footer></footer>
+
+        <footer className="w-full mt-auto">
+          <Footer />
+        </footer>
       </body>
     </html>
   );
