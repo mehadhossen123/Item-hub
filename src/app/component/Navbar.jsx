@@ -5,6 +5,7 @@ import React from "react";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import Link from "next/link";
+import AuthButton from "./auth/AuthButton";
 
 const Navbar = () => {
   const nav = (
@@ -16,7 +17,7 @@ const Navbar = () => {
         <NavLink href={"/product"}>Product</NavLink>
       </li>
       <li>
-        <NavLink href={"/blogs"}>Blogs</NavLink>
+        <NavLink href={"/item"}>Add item</NavLink>
       </li>
       <li>
         <NavLink href={"/contact"}>Contact</NavLink>
@@ -59,7 +60,8 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-4">
          
-        <Link className="btn btn-primary btn-outline" href={'/login'}>Login</Link>
+        {/* <Link className="btn btn-primary btn-outline" href={'/login'}>Login</Link> */}
+        <AuthButton></AuthButton>
         </div>
       </div>
     </div>

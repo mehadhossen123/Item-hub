@@ -3,43 +3,44 @@
 import Link from "next/link";
 import React from "react";
 import SocialButton from "../component/auth/SocialButton";
-// import { signIn } from "next-auth/react";
-// import { FcGoogle } from "react-icons/fc"; // npm install react-icons
-// import Swal from "sweetalert2";
-// import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc"; // npm install react-icons
+import Swal from "sweetalert2";
+import { useRouter, useSearchParams } from "next/navigation";
+
 
 
 const LoginPage = () => {
-//   const router = useRouter();
+  const router = useRouter();
 
-//   const params = useSearchParams();
-//   const handleEmailLogin = async (e) => {
-//     e.preventDefault();
-//     const form = {
-//       email: e.target.email.value,
-//       password: e.target.password.value,
-//     };
-//     const result = await signIn("credentials", {
-//       redirect: false,
-//       password: form.password,
-//       email: form.email,
-//       callbackUrl: params.get("callbackUrl") || "/",
-//     });
-//     if (!result.ok) {
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops...",
-//         text: " wrong password or email/try google login  !",
-//       });
-//     } else {
-//       Swal.fire({
-//         icon: "success",
+  const params = useSearchParams();
+  const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    const form = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+    const result = await signIn("credentials", {
+      redirect: false,
+      password: form.password,
+      email: form.email,
+      callbackUrl: params.get("callbackUrl") || "/",
+    });
+    if (!result.ok) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " wrong password or email/try google login  !",
+      });
+    } else {
+      Swal.fire({
+        icon: "success",
 
-//         text: "login successful  !",
-//       });
-//       router.push(params.get("callbackUrl") || "/");
-//     }
-//   };
+        text: "login successful  !",
+      });
+      router.push(params.get("callbackUrl") || "/");
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center mt-20 justify-center bg-gray-100 px-4">
@@ -55,9 +56,7 @@ const LoginPage = () => {
         </div>
 
         {/* Email Login Form */}
-        <form className="mt-8 space-y-6" 
-        // onSubmit={handleEmailLogin}
-        >
+        <form className="mt-8 space-y-6" onSubmit={handleEmailLogin}>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -108,8 +107,7 @@ const LoginPage = () => {
         <p className="mt-6 text-center text-sm text-gray-500">
           Don't have an account?{" "}
           <Link
-            // href={`/register?callbackUrl=${params.get("callbackUrl") || "/"}`}
-            href={"/register"}
+            href={`/register?callbackUrl=${params.get("callbackUrl") || "/"}`}
             className="font-semibold text-blue-600 hover:underline"
           >
             Register

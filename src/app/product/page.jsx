@@ -11,9 +11,10 @@ const ProductPage = async () => {
         Available Items <span className="text-primary">{products.length}</span>
       </h1>
       {/* Added gap and more breakpoints */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className=" grid md:grid-cols-4 gap-5 sm:grid-cols-3 grid-cols-2">
        {products.map((product)=><ProductCard product={product} key={product._id.toString()}></ProductCard>)}
       </div>
+
     </div>
   );
 };

@@ -35,3 +35,20 @@ export const postUser = async (payload) => {
     };
   }
 };
+
+export const loginUser = async (payload) => {
+  const { email, password } = payload;
+  if (!email || !password) {
+    return null;
+  }
+  const isUserExist = await connect(collections.USERS).findOne({ email });
+  if (!isUserExist) {
+    return null;
+  }
+  const isMatched = await bcrypt.compare(password, isUserExist.password);
+  if (isMatched) {
+    return isUserExist;
+  } else {
+    return null;
+  }
+};
