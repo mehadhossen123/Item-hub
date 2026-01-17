@@ -53,7 +53,7 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className=" bg-gray-50">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
           What Our <span className="text-primary"> Customers</span> Say
