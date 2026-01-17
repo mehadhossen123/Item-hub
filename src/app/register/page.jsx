@@ -3,35 +3,35 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc"; // npm install react-icons
 import Link from "next/link";
-// import { postUser } from "@/actions/server/auth";
-// import { useRouter, useSearchParams } from "next/navigation";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import Swal from "sweetalert2";
+import { postUser } from "../action/server/auth";
 // import { signIn } from "next-auth/react";
 
+
 const RegisterPage = () => {
-//   const params = useSearchParams();
-//   const callback = params.get("callbackUrl") || "/";
-//   const router = useRouter();
-//   const handleRegister = async (e) => {
-//     e.preventDefault();
-//     const name = e.target.name.value;
-//     const email = e.target.email.value;
-//     const password = e.target.password.value;
-//     const newUser = {
-//       name,
-//       email,
-//       password,
-//     };
-//     const result = await postUser(newUser);
-//     if (result.acknowledged) {
-//       router.push(`/login`);
-//       signIn("credentials", {
-//         email: newUser.email,
-//         password: newUser.password,
-//         callbackUrl: callback,
-//       });
-//       alert("Registation successful .please login");
-//     }
-//   };
+  const params=useSearchParams()
+  // const callback=params.get('callbackUrl')||'/'
+    const router=useRouter()
+  const handleRegister =async(e) => {
+    e.preventDefault();
+    const name=e.target.name.value;
+    const email=e.target.email.value;
+    const password=e.target.password.value;
+    const newUser={
+        name,email,password
+    }
+    const result=await postUser(newUser)
+    if(result.acknowledged){
+      
+        router.push(`/login`)
+        // signIn('credentials',{email:newUser.email,password:newUser.password,callbackUrl:callback})
+         Swal.fire('success','Registration successful','success')
+
+
+    }
+  };
 
 //   const handleGoogleRegister = () => {
 //     console.log("Registering with Google...");
@@ -50,7 +50,7 @@ const RegisterPage = () => {
 
         {/* Registration Form */}
         <form className="mt-8 space-y-5" 
-        // onSubmit={handleRegister}
+        onSubmit={handleRegister}
         >
           <div className="space-y-4">
             {/* Name Field */}
