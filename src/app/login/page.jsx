@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import SocialButton from "../component/auth/SocialButton";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc"; // npm install react-icons
@@ -12,9 +12,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
   const router = useRouter();
+  const [isLoading,setIsLoading]=useState(false)
 
   const params = useSearchParams();
   const handleEmailLogin = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const form = {
       email: e.target.email.value,
@@ -40,6 +42,7 @@ const LoginPage = () => {
       });
       router.push(params.get("callbackUrl") || "/");
     }
+    setIsLoading(false)
   };
 
   return (
@@ -84,8 +87,8 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary w-full ">
-            Login
+          <button disabled={isLoading} type="submit" className={`btn btn-primary w-full ${isLoading&& 'text-black'}`}>
+           {isLoading?'logging...':"Login"}
           </button>
         </form>
 
