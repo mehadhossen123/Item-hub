@@ -5,7 +5,7 @@ const CTASection = () => {
     <section className="py-24 bg-gradient-to-r rounded-xl from-blue-600 to-blue-800 text-white">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-          Ready to Explore Our Products?
+          Ready to <span className="text-primary"> Explore </span> Our Products?
         </h2>
         <p className="text-lg md:text-xl mb-8">
           Join thousands of happy customers. Sign up today and start your

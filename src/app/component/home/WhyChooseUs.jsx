@@ -26,7 +26,7 @@ const WhyChooseUs = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-          Why Choose Us
+          Why <span className="text-primary"> Choose</span> Us
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

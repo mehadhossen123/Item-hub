@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
         {/* View Details Button */}
         <div className="mt-auto pt-4">
           <Link href={`/product/${product._id}`}>
-            <button className="w-full py-2.5 bg-primary text-white font-medium rounded-xl hover:bg-orange-600 active:scale-95 transition-all duration-200 shadow-md">
+            <button className="w-full py-2.5 bg-primary cursor-pointer text-white font-medium rounded-xl hover:bg-orange-600 active:scale-95 transition-all duration-200 shadow-md">
               View Details
             </button>
           </Link>
