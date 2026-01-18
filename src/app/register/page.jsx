@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc"; // npm install react-icons
 import Link from "next/link";
 
@@ -12,9 +12,12 @@ import { postUser } from "../action/server/auth";
 
 const RegisterPage = () => {
   const params=useSearchParams()
+  const [isLoading, setIsLoading] = useState(false);
+
   // const callback=params.get('callbackUrl')||'/'
     const router=useRouter()
   const handleRegister =async(e) => {
+    setIsLoading(true);
     e.preventDefault();
     const name=e.target.name.value;
     const email=e.target.email.value;
@@ -31,6 +34,7 @@ const RegisterPage = () => {
 
 
     }
+    setIsLoading(false)
   };
 
 //   const handleGoogleRegister = () => {
@@ -49,9 +53,7 @@ const RegisterPage = () => {
         </div>
 
         {/* Registration Form */}
-        <form className="mt-8 space-y-5" 
-        onSubmit={handleRegister}
-        >
+        <form className="mt-8 space-y-5" onSubmit={handleRegister}>
           <div className="space-y-4">
             {/* Name Field */}
             <div>
@@ -97,8 +99,12 @@ const RegisterPage = () => {
           </div>
 
           {/* Register Button */}
-          <button type="submit" className=" w-full btn btn-primary">
-            Register Now
+          <button
+            disabled={isLoading}
+            type="submit"
+            className={`w-full btn btn-primary ${isLoading&& 'text-black'}`}
+          >
+            {isLoading ? "Account creating..." : " Register Now"}
           </button>
         </form>
 
@@ -111,7 +117,7 @@ const RegisterPage = () => {
 
         {/* Google Register Button */}
         <button
-        //   onClick={handleGoogleRegister}
+          //   onClick={handleGoogleRegister}
           type="button"
           className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors"
         >
