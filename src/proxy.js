@@ -11,7 +11,8 @@ export async function proxy(req) {
 
   if (!token && isPrivate) {
     const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set('callbackUrl',pathname)
+   loginUrl.searchParams.set("callbackUrl", pathname);
+
     return NextResponse.redirect(loginUrl);
   }
 

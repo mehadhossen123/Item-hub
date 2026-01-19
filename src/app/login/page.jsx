@@ -45,6 +45,32 @@ const LoginPage = () => {
     setIsLoading(false)
   };
 
+
+//  const handleEmailLogin = async (e) => {
+//    setIsLoading(true);
+//    e.preventDefault();
+
+//    // ১. ইউআরএল থেকে বর্তমান callbackUrl নিন
+//    const callbackUrl = params.get("callbackUrl") || "/";
+
+//    const result = await signIn("credentials", {
+//      redirect: false,
+//      email: e.target.email.value,
+//      password: e.target.password.value,
+//    });
+
+//    if (result?.error) {
+//      setIsLoading(false);
+//      Swal.fire({
+//        icon: "error",
+//        title: "Oops...",
+//        text: "Wrong password or email!",
+//      });
+//    } else {
+    
+//      window.location.href = callbackUrl;
+//    }
+//  };
   return (
     <div className="flex min-h-screen items-center mt-20 justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-lg">
